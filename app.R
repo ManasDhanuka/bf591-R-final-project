@@ -1,3 +1,6 @@
+#Author : Manas Dhanuka 
+#Description : RShiny app for RNA seq data analysis
+
 #import libraries
 options(shiny.maxRequestSize=30*1024^2)
 library(shiny)
