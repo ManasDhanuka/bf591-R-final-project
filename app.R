@@ -21,14 +21,19 @@ library('DESeq2')
 library('biomaRt')
 library(Rcpp)
 library(ComplexHeatmap)
+library(shinyWidgets)
 
 #defining UI
 ui <- fluidPage(theme = shinytheme("flatly"),
     
     # Application title
-    titlePanel("BF591 Final Project", windowTitle = "Manas Dhanuka BF 591 Final Project"),
+    titlePanel("mRNA-Seq Data Analysis Suite", windowTitle = "Manas Dhanuka BF 591 Final Project"),
     
-    p(" This is a interactive R Shiny suite to vizualize and analyse the data produced by Labadorf et al. in the study \"mRNA-Seq Expression profiling of human post-mortem BA9 brain tissue for Huntington's Disease and neurologically normal individuals\".", style = "font-size:18px;"),
+    p(" This is a interactive R Shiny suite made to vizualize and analyze the data produced by Labadorf et al. in the 2015 study 
+      \"mRNA-Seq Expression profiling of human post-mortem BA9 brain tissue for Huntington's Disease and neurologically normal individuals\".", 
+      style = "font-size:18px;"),
+    
+    setSliderColor(c("#41817F","#41817F","#41817F","#41817F","#41817F","#41817F"), c(1,2,3,4,5,6)),
     
     ########################### USER INTERFACE ###################################
     
@@ -50,7 +55,7 @@ ui <- fluidPage(theme = shinytheme("flatly"),
                                    h5("Shows the metadata table uploaded with a search bar and sortable columns.", br()),
                                    
                                    strong("Plot:"),
-                                   h5("Allows the user to plot the continous variables shown in from the Summary section as Histograms. ")
+                                   h5("Allows the user to plot the continous variables shown in the Summary section as Histograms. ")
                                  
                                    
                      ),
@@ -99,18 +104,18 @@ ui <- fluidPage(theme = shinytheme("flatly"),
                                    h5("Summarizes the results of the filters selected."),
                                    
                                    strong("Diagnostic Plots:"),
-                                   h5("Scatter plots of median counts vs variance and median count vs number of zeros of the genes that pass the filters."),
+                                   h5("Scatter plots of median counts vs variance and median count vs number of zeros for the genes that pass the filters."),
                                    
                                    strong("Heatmap:"),
                                    h5("Plot a clustered heatmap of counts passing the selected filters"),
                                    
                                    strong("PCA:"),
-                                   h5("Plot a scatter of plot of the selected prinicpal components on the axes, for the data passing the selected filters.", br(), br()),
+                                   h5("Plot a scatter plot of the selected prinicpal components on the x and y axes, for the data passing the selected filters.", br(), br()),
                                    
                                 
                                    #slider inputs
                                    sliderInput(inputId = "var_slider", label = "Percentile of Variance", min = 0, max = 100, value = 50),
-                                   sliderInput(inputId = "non_zero_slider", label = "Number of Non-Zero Samples " , min = 0, max = 50, value = 20)
+                                   sliderInput(inputId = "non_zero_slider", label = "Number of Non-Zero Samples " , min = 0, max = 60, value = 20)
                                  
                                    
                      ),
@@ -181,7 +186,7 @@ ui <- fluidPage(theme = shinytheme("flatly"),
                                              accept = ".csv", 
                                              buttonLabel = "Browse", placeholder = "deseq_res.csv"),
                                    
-                                   strong("The Differential Expression section of the suite allows the user to upload DESeq2 results file to  vizualize and view the data.", br(), br()),
+                                   strong("The Differential Expression section of the suite allows the user to upload a DESeq2 results file to  vizualize and view the data.", br(), br()),
                                    
                                    strong("Plot:"),
                                    h5("Plot different paramets of the differential expression file and color data points according to a selected pvalue threshold."),
@@ -255,7 +260,9 @@ ui <- fluidPage(theme = shinytheme("flatly"),
                                              accept = ".csv", 
                                              buttonLabel = "Browse", placeholder = "deseq_res.csv"),
                                    
-                                   strong("The GSEA section of the suite allows the user to upload a DESeq2 results differential gene expression file. It performs fgsea on the uploaded files using the  Hallmark gene set from MSigDB to vizualize and view the resultant data.", br(), br()),
+                                   strong("The GSEA section of the suite allows the user to upload a DESeq2 results differential gene expression file. 
+                                          It performs fgsea on the uploaded files using the  Hallmark gene set from MSigDB. 
+                                          The resultant data can then be viewed and visualized in this section.", br(), br()),
                                    
                                    strong("NES Bar Plot:"),
                                    h5("Plot a Horizontal Bar plot of the selected number of top pathways."),
@@ -303,7 +310,7 @@ ui <- fluidPage(theme = shinytheme("flatly"),
                                       
                                       
                              ),
-                             tabPanel("NES Scatter Plot", br(), 
+                             tabPanel("-Log10(padj) vs NES Scatter Plot", br(), 
                                       
                                       sidebarLayout(
                                           sidebarPanel(
