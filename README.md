@@ -7,14 +7,19 @@
 
 * The app performs
   * Summary of the data 
+  * ![Alt text](/images/Screenshot%20(73).png "Optional title")
   * Counts Matrix Analysis 
+  * ![Alt text](/images/Screenshot%20(76).png "Optional title")
   * Differential Expression Analysis 
+  * ![Alt text](/images/Screenshot%20(77).png "Optional title")
   * GSEA (Geneset Enrichment Analysis)
+  * ![Alt text](/images/Screenshot%20(79).png "Optional title")
  
 
 :file_folder: **Data**
 
 * Directory containing all the supporting data files
+
 
 # Contributor
 
