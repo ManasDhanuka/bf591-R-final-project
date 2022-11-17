@@ -1,4 +1,5 @@
 # bf591-R-final-project
+Final semester project for the course; R for Biological Science
 
 
 :page_facing_up: **app.R**
